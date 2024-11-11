@@ -1,8 +1,8 @@
-
+// import './styles/components/reg-modal-container.scss';
 
 const RegistrationModal = () => {
   return (
-    <div>
+    <div className="reg-modal-container">
       <form id="registrationForm">
         <h1>Registration Form</h1>
         <input type="email" placeholder="User email"></input>
