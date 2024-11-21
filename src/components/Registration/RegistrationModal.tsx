@@ -1,41 +1,47 @@
 // import './styles/components/reg-modal-container.scss';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
-
 const RegistrationModal = () => {
   const [valueName, setValueName] = useState('');
-  const [valuePassword, setValuePassword] = useState('');
-  const [email, setEmail] = useState('');
+  // const [valuePassword, setValuePassword] = useState('');
+  // const [email, setEmail] = useState('');
+  const [userEmailAndPassword, setUserEmailAndPassword] = useState({
+    email: '',
+    password: '',
+  });
+
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
   const validateEmail = () => {
-    if (email.length < 4) {
+    if (userEmailAndPassword.email.length < 4) {
       setEmailError('Your email must contain at least four characters.');
       return false;
     }
-    
+
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
+    if (!emailPattern.test(userEmailAndPassword.email)) {
       setEmailError('Введите корректный e-mail.');
       return false;
     }
 
-    setEmailError(''); 
+    setEmailError('');
     return true;
   };
 
   const validatePassword = () => {
-    if (valuePassword.length < 8) {
+    if (userEmailAndPassword.password.length < 8) {
       setPasswordError('The password must be at least eight characters long.');
       return false;
     }
-    if (valuePassword.length > 30) {
-      setPasswordError('The password must be no more than thirty characters long.');
+    if (userEmailAndPassword.password.length > 30) {
+      setPasswordError(
+        'The password must be no more than thirty characters long.'
+      );
       return false;
     }
-    
-    setPasswordError(''); 
+
+    setPasswordError('');
     return true;
   };
 
@@ -47,8 +53,7 @@ const RegistrationModal = () => {
 
     if (isEmailValid && isPasswordValid) {
       console.log(`Login: ${valueName}`);
-      console.log(`Password: ${valuePassword}`);
-     
+      console.log(`Password: ${userEmailAndPassword.password}`);
     }
   };
 
@@ -57,23 +62,31 @@ const RegistrationModal = () => {
   };
 
   const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
+    setUserEmailAndPassword({
+      ...userEmailAndPassword,
+      email: event.target.value,
+    });
+    // setEmail(event.target.value);
   };
 
   const handleChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setValuePassword(event.target.value);
+    setUserEmailAndPassword({
+      ...userEmailAndPassword,
+      password: event.target.value,
+    });
+    // setValuePassword(event.target.value);
   };
 
   return (
     <div className="reg-modal-container">
       <form id="registrationForm" onSubmit={handleSubmit}>
         <label>Registration Form</label>
-        
+
         <input
           type="email"
           placeholder="User email"
           onChange={handleChangeEmail}
-          value={email}
+          value={userEmailAndPassword.email}
         />
         {emailError && <div className="error">{emailError}</div>}
 
@@ -88,7 +101,7 @@ const RegistrationModal = () => {
           type="password"
           placeholder="User password"
           onChange={handleChangePassword}
-          value={valuePassword}
+          value={userEmailAndPassword.password}
         />
         {passwordError && <div className="error">{passwordError}</div>}
 
