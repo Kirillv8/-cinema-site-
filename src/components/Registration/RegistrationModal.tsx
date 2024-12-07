@@ -3,8 +3,6 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 const RegistrationModal = () => {
   const [valueName, setValueName] = useState('');
-  // const [valuePassword, setValuePassword] = useState('');
-  // const [email, setEmail] = useState('');
   const [userEmailAndPassword, setUserEmailAndPassword] = useState({
     email: '',
     password: '',
@@ -21,7 +19,7 @@ const RegistrationModal = () => {
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(userEmailAndPassword.email)) {
-      setEmailError('Введите корректный e-mail.');
+      setEmailError('Please enter correct e-mail.');
       return false;
     }
 
@@ -66,7 +64,6 @@ const RegistrationModal = () => {
       ...userEmailAndPassword,
       email: event.target.value,
     });
-    // setEmail(event.target.value);
   };
 
   const handleChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +71,6 @@ const RegistrationModal = () => {
       ...userEmailAndPassword,
       password: event.target.value,
     });
-    // setValuePassword(event.target.value);
   };
 
   return (
