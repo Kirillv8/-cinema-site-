@@ -1,4 +1,6 @@
 import Pagination from '../Pagination/Pagination';
+import imageCloseButton from '../../assets/free-icon-close-button.png';
+import './Filters.scss';
 const Filters = () => {
   return (
     <>
@@ -8,9 +10,9 @@ const Filters = () => {
             <h2>Фильтры</h2>
           </div>
           <div>
-            <a href="./assets/free-icon-close-button.png">
-              <button>Закрыть</button>
-            </a>
+            <button>
+              <img src={imageCloseButton} alt="close-button" />
+            </button>
           </div>
           <div>
             <label htmlFor="films">Сортировать по:</label>
