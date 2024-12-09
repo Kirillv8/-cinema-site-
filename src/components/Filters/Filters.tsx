@@ -1,3 +1,4 @@
+import Pagination from '../Pagination/Pagination';
 const Filters = () => {
   return (
     <>
@@ -12,13 +13,14 @@ const Filters = () => {
             </a>
           </div>
           <div>
-            <label htmlFor="films">Сортировать по</label>
+            <label htmlFor="films">Сортировать по:</label>
             <select name="films" id="films">
-              <option>комедии</option>
-              <option>боеквик\</option>
-              <option>драма</option>
+              <option>Комедии</option>
+              <option>Боевики</option>
+              <option>Драмы</option>
             </select>
           </div>
+          <Pagination />
         </div>
       </section>
     </>
