@@ -1,12 +1,12 @@
-import Pagination from '../Pagination/Pagination';
-import imageCloseButton from '../../assets/free-icon-close-button.png';
-import './Filters.scss';
+import Pagination from "../Pagination/Pagination";
+import imageCloseButton from "../../assets/free-icon-close-button.png";
+import "./Filters.scss";
 const Filters = () => {
   return (
     <>
       <section>
         <div className="section-container">
-          <div>
+          <div className="container-h2">
             <h2>Фильтры</h2>
           </div>
           <div>
@@ -14,7 +14,7 @@ const Filters = () => {
               <img src={imageCloseButton} alt="close-button" />
             </button>
           </div>
-          <div>
+          <div className="container-select">
             <label htmlFor="films">Сортировать по:</label>
             <select name="films" id="films">
               <option>Комедии</option>
@@ -22,7 +22,9 @@ const Filters = () => {
               <option>Драмы</option>
             </select>
           </div>
-          <Pagination />
+          <div className="pagination-container">
+            <Pagination />
+          </div>
         </div>
       </section>
     </>

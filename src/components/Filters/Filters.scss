@@ -1,8 +1,37 @@
+// .section-container {
+//   display: flex;
+//   padding: 20px;
+//   // min-width: 10vw;
+//   width: 400px;
+//   height: 100vh;
+//   border: 1px solid wheat;
+
+// flex-direction: column;
+//   justify-content: space-between;
+//   border: 1px solid wheat;
+// }
+
+// .container-h2 {
+//   display: flex;
+//   align-items: flex-start;
+// }
+
 .section-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-between; /* Распределение: верхняя часть сверху, пагинация снизу */
+  height: 100vh;
+  padding: 20px;
   border: 1px solid wheat;
+}
+
+.container-select {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.pagination-container {
+  margin-top: auto;
 }
 
 img {
