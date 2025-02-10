@@ -1,6 +1,7 @@
 import Pagination from "../Pagination/Pagination";
 import imageCloseButton from "../../assets/free-icon-close-button.png";
 import "./Filters.scss";
+import MovieList from "../MovieList/MovieList";
 const Filters = () => {
   return (
     <>
@@ -21,6 +22,9 @@ const Filters = () => {
               <option>Боевики</option>
               <option>Драмы</option>
             </select>
+          </div>
+          <div>
+            <MovieList/>
           </div>
           <div className="pagination-container">
             <Pagination />

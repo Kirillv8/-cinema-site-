@@ -9,11 +9,13 @@ export const getGenres = async (url: string, token: string) => {
     });
     if (response.ok) {
       const data = await response.json();
-      return data;
+
+      return data.genres ?? [];
     } else {
       throw new Error(`Ошибка: ${response.status} ${response.statusText}`);
     }
   } catch (error) {
-    alert(error);
+    console.error(error);
+    return [];
   }
 };
