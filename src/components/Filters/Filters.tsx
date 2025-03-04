@@ -3,7 +3,11 @@ import Pagination from "../Pagination/Pagination";
 import imageCloseButton from "../../assets/free-icon-close-button.png";
 import "./Filters.scss";
 import MovieList from "../MovieList/MovieList";
-
+import Select from "./Select";
+import {
+  optiionsYears,
+  optionsGenres,
+} from "../../data/selectOptions/selectOptions";
 const Filters = () => {
   const [selectedGenres, setSelectedGenres] = useState<Set<string>>(new Set());
 
@@ -25,15 +29,25 @@ const Filters = () => {
             </button>
           </div>
           <div className="container-select">
-            <label htmlFor="films">Сортировать по:</label>
-            <select name="films" id="films">
-              <option>Комедии</option>
-              <option>Боевики</option>
-              <option>Драмы</option>
-            </select>
+            <Select
+              label={"Сортировать по:"}
+              htmlFor={"genres"}
+              id={"genres"}
+              options={optionsGenres}
+            />
+            <Select
+              label={"Год релиза:"}
+              htmlFor={"year"}
+              id={"year"}
+              options={optiionsYears}
+            />
           </div>
+
           <div>
-            <MovieList selectedGenres={selectedGenres} setSelectedGenres={setSelectedGenres} />
+            <MovieList
+              selectedGenres={selectedGenres}
+              setSelectedGenres={setSelectedGenres}
+            />
           </div>
           <div className="pagination-container">
             <Pagination />
