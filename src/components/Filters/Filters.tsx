@@ -6,28 +6,33 @@ import MovieList from "../MovieList/MovieList";
 import Select from "./Select";
 import { optionAll } from "../../data/selectOptions/selectOptions";
 import { ChangeEvent } from "react";
+import { useReducer } from "react";
+
+interface Action {
+  type: "change";
+  event: string | number;
+}
+
+interface Option {
+  value: string | number;
+  label: string;
+}
 
 const Filters = () => {
   const [selectedGenres, setSelectedGenres] = useState<Set<string>>(new Set());
-  const [optionsSelect, setOptionsSelect] = useState(optionAll);
+  const [optionsSelect, dispatch] = useReducer(yourReducer, optionAll);
 
   const optionsGenres = optionAll.slice(0, 4);
-  console.log(optionsGenres);
 
   const optionsYears = optionAll.slice(4, 8);
-  console.log(optionsYears);
 
   const curentValueGenres = optionsGenres.slice(3, 4);
-  console.log(curentValueGenres);
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = e.target.value;
-    const selectedOption = optionAll.find((option) => {
-      return option.value === selectedValue;
+    dispatch({
+      type: "change",
+      event: e.target.value,
     });
-    if (selectedOption) {
-      setOptionsSelect([selectedOption]);
-    }
   };
 
   const resetFilters = () => {
@@ -80,3 +85,17 @@ const Filters = () => {
 };
 
 export default Filters;
+
+const yourReducer = (optionAll: Option[], action: Action) => {
+  switch (action.type) {
+    case "change": {
+      const selectedValue = action.event;
+      const selectedOption = optionAll.find(
+        (option) => option.value === selectedValue
+      );
+      return selectedOption ? [selectedOption] : optionAll;
+    }
+    default:
+      return optionAll;
+  }
+};
