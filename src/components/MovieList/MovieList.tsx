@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import { getGenres } from "../../api/moviesApi";
 
 interface Genre {
@@ -19,11 +19,14 @@ const MovieList: React.FC<MovieListProps> = ({
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const url = "https://api.themoviedb.org/3/genre/movie/list?language=en";
-    const token =
-      "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1NTIwMDQ1ZmZjNDU2Y2ZlNTdmYWFhOTBiNTFjMTk2YSIsIm5iZiI6MTcyMjUyNzM0OS4wODgsInN1YiI6IjY2YWJhZTc1NGZlNDIxMzEwY2QyY2M4YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tiiJIjyQwzyPjCE1wkYwAyuFwBAH48g_V2plF_4kwow";
 
+
+  const url = "https://api.themoviedb.org/3/genre/movie/list?language=en";
+
+  const token =
+    "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1NTIwMDQ1ZmZjNDU2Y2ZlNTdmYWFhOTBiNTFjMTk2YSIsIm5iZiI6MTcyMjUyNzM0OS4wODgsInN1YiI6IjY2YWJhZTc1NGZlNDIxMzEwY2QyY2M4YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tiiJIjyQwzyPjCE1wkYwAyuFwBAH48g_V2plF_4kwow";
+
+  useEffect(() => {
     const requestGenres = async () => {
       try {
         setLoading(true);
