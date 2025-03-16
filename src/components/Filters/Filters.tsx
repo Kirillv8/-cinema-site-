@@ -8,7 +8,9 @@ import { ChangeEvent } from "react";
 import { ContextOptionGenres } from "../../context/ContextForFlters/ContextForFilters";
 import { ContextOptionsYears } from "../../context/ContextForFlters/ContextForFilters";
 import { useChangeDispatch } from "../../context/ContextForFlters/ContextForFilters";
-
+import { Button } from "@mui/material";
+import { IconButton } from "@mui/material";
+import { Delete } from "@mui/icons-material";
 const Filters = () => {
   const [selectedGenres, setSelectedGenres] = useState<Set<string>>(new Set());
   const optionsGenres = useContext(ContextOptionGenres);
@@ -34,6 +36,11 @@ const Filters = () => {
             <h2>Фильтры</h2>
           </div>
           <div>
+            {/* <Button variant="contained">Hello world</Button> */}
+            <IconButton aria-label="fingerprint" color="success">
+              {" "}
+              <Delete />
+            </IconButton>
             <button onClick={resetFilters}>Сбросить фильтры</button>
             <button>
               <img src={imageCloseButton} alt="close-button" />
