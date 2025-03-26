@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { getGenres } from "../../api/moviesApi";
 import { ContextToken } from "../../context/ContextForToken/ContextToken";
+import { Box, Checkbox, FormControlLabel } from "@mui/material";
 
 interface Genre {
   id: number | string;
@@ -60,17 +61,20 @@ const MovieList: React.FC<MovieListProps> = ({
   return (
     <>
       {genres.map((genre) => (
-        <div key={genre.id}>
-          <input
-            type="checkbox"
-            checked={selectedGenres.has(genre.id.toString())}
-            onChange={(e) =>
-              handleGenreChange(genre.id.toString(), e.target.checked)
+        <Box key={genre.id}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={selectedGenres.has(genre.id.toString())}
+                onChange={(e) =>
+                  handleGenreChange(genre.id.toString(), e.target.checked)
+                }
+                id={`genre-${genre.id}`}
+              />
             }
-            id={`genre-${genre.id}`}
+            label={genre.name}
           />
-          <label htmlFor={`genre-${genre.id}`}>{genre.name}</label>
-        </div>
+        </Box>
       ))}
     </>
   );

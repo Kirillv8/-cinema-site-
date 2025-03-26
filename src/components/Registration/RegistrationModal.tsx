@@ -1,45 +1,51 @@
 // import './styles/components/reg-modal-container.scss';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from "react";
+import { FormControl, TextField, Button, FormHelperText } from "@mui/material";
 
-const RegistrationModal = () => {
-  const [valueName, setValueName] = useState('');
-  const [userEmailAndPassword, setUserEmailAndPassword] = useState({
-    email: '',
-    password: '',
-  });
+interface PropForRegistration {
+  isVisibleReg: boolean;
+}
 
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+const RegistrationModal: React.FC<PropForRegistration> = ({ isVisibleReg }) => {
+  const [userEmailAndPasswordAndName, setUserEmailAndPasswordAndName] =
+    useState({
+      email: "",
+      password: "",
+      name: "",
+    });
+
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const validateEmail = () => {
-    if (userEmailAndPassword.email.length < 4) {
-      setEmailError('Your email must contain at least four characters.');
+    if (userEmailAndPasswordAndName.email.length < 4) {
+      setEmailError("Your email must contain at least four characters.");
       return false;
     }
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(userEmailAndPassword.email)) {
-      setEmailError('Please enter correct e-mail.');
+    if (!emailPattern.test(userEmailAndPasswordAndName.email)) {
+      setEmailError("Please enter correct e-mail.");
       return false;
     }
 
-    setEmailError('');
+    setEmailError("");
     return true;
   };
 
   const validatePassword = () => {
-    if (userEmailAndPassword.password.length < 8) {
-      setPasswordError('The password must be at least eight characters long.');
+    if (userEmailAndPasswordAndName.password.length < 8) {
+      setPasswordError("The password must be at least eight characters long.");
       return false;
     }
-    if (userEmailAndPassword.password.length > 30) {
+    if (userEmailAndPasswordAndName.password.length > 30) {
       setPasswordError(
-        'The password must be no more than thirty characters long.'
+        "The password must be no more than thirty characters long."
       );
       return false;
     }
 
-    setPasswordError('');
+    setPasswordError("");
     return true;
   };
 
@@ -50,60 +56,68 @@ const RegistrationModal = () => {
     const isPasswordValid = validatePassword();
 
     if (isEmailValid && isPasswordValid) {
-      console.log(`Login: ${valueName}`);
-      console.log(`Password: ${userEmailAndPassword.password}`);
+      console.log(`Login: ${userEmailAndPasswordAndName.email}`);
+      console.log(`Password: ${userEmailAndPasswordAndName.password}`);
     }
   };
 
   const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
-    setValueName(event.target.value);
+    setUserEmailAndPasswordAndName({
+      ...userEmailAndPasswordAndName,
+      name: event.target.value,
+    });
   };
 
   const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
-    setUserEmailAndPassword({
-      ...userEmailAndPassword,
+    setUserEmailAndPasswordAndName({
+      ...userEmailAndPasswordAndName,
       email: event.target.value,
     });
   };
 
   const handleChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setUserEmailAndPassword({
-      ...userEmailAndPassword,
+    setUserEmailAndPasswordAndName({
+      ...userEmailAndPasswordAndName,
       password: event.target.value,
     });
   };
 
   return (
-    <div className="reg-modal-container">
-      <form id="registrationForm" onSubmit={handleSubmit}>
-        <label>Registration Form</label>
-
-        <input
+    <form id="registrationForm" onSubmit={handleSubmit}>
+      <FormControl>
+        <TextField
           type="email"
-          placeholder="User email"
+          autoComplete="on"
+          id="outlined-controlled"
+          label="User email"
+          variant="outlined"
+          value={userEmailAndPasswordAndName.email}
           onChange={handleChangeEmail}
-          value={userEmailAndPassword.email}
         />
-        {emailError && <div className="error">{emailError}</div>}
-
-        <input
+      </FormControl>
+      <FormControl>
+        <TextField
           type="text"
-          placeholder="User name"
+          autoComplete="on"
+          id="outlined-controlled"
+          label="User name"
+          variant="outlined"
+          value={userEmailAndPasswordAndName.name}
           onChange={handleChangeName}
-          value={valueName}
         />
-
-        <input
+      </FormControl>
+      <FormControl>
+        <TextField
           type="password"
-          placeholder="User password"
+          autoComplete="on"
+          id="outlined-controlled"
+          label="User password"
+          variant="outlined"
+          value={userEmailAndPasswordAndName.password}
           onChange={handleChangePassword}
-          value={userEmailAndPassword.password}
         />
-        {passwordError && <div className="error">{passwordError}</div>}
-
-        <button type="submit">Зарегистрироваться</button>
-      </form>
-    </div>
+      </FormControl>
+    </form>
   );
 };
 

@@ -1,41 +1,30 @@
-// import './Header.scss';
-import { Box } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import { Box, Typography, Toolbar, Button } from "@mui/material";
 
-// const Header = () => {
-//   return (
-//     <>
-//       <header className="header-container">
-//         <div>
-//           <h2>Фильмы</h2>
-//         </div>
-//         <div>
-//           <button>Авторизоваться/Регистрироваться</button>
-//         </div>
-//       </header>
-//     </>
-//   );
-// };
+interface PropHeader {
+  handleClick: () => void;
+}
 
-// export default Header;
-
-const Header = () => {
-  //   return (
-  //     <>
-  //       <header className="header-container">
+const Header: React.FC<PropHeader> = ({ handleClick }) => {
   return (
     <>
-      <Box component="header"></Box>
+      <AppBar position="static" color="success">
+        <Toolbar>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            Фильмы
+          </Typography>
+          <Box sx={{ display: "flex", gap: 2 }}>
+            <Button color="inherit" variant="outlined">
+              Вход
+            </Button>
+            <Button color="inherit" variant="outlined" onClick={handleClick}>
+              Регистрация
+            </Button>
+          </Box>
+        </Toolbar>
+      </AppBar>
     </>
   );
-  //         <div>
-  //           <h2>Фильмы</h2>
-  //         </div>
-  //         <div>
-  //           <button>Авторизоваться/Регистрироваться</button>
-  //         </div>
-  //       </header>
-  //     </>
-  //   );
 };
 
 export default Header;

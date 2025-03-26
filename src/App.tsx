@@ -10,12 +10,15 @@ const App: React.FC = () => {
   const [isVisibleReg, setIsVisibleReg] = useState<boolean>(false);
   const [isVisibleAuth, setIsVisibleAuth] = useState<boolean>(false);
 
+  const handleClick = () => {
+    setIsVisibleReg(!isVisibleReg);
+  };
   const token = useContext(ContextToken);
   return (
     <>
       <ContextToken.Provider value={token}>
-        {isVisibleReg && <RegistrationModal />}
-        <Header />
+        {isVisibleReg && <RegistrationModal isVisibleReg={isVisibleReg} />}
+        <Header handleClick={handleClick} />
         <FiltersProvider>
           <Filters />
         </FiltersProvider>

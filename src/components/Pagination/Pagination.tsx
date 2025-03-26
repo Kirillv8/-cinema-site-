@@ -1,46 +1,36 @@
-import imageArrowLeft from '../../assets/free-icon-left.png';
-import imageArrowRight from '../../assets/free-icon-right.png';
-import './Pagination.scss';
+import imageArrowLeft from "../../assets/free-icon-left.png";
+import imageArrowRight from "../../assets/free-icon-right.png";
+import { Box, Button, ListItem } from "@mui/material";
+import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
+
 const Pagination = () => {
+  const numbersButton = [1, 2, 3, 4, 5];
+  const res = numbersButton.map((number) => {
+    return (
+      <ListItem key={`number: ${number}`}>
+        <Button variant="outlined">{number}</Button>
+      </ListItem>
+    );
+  });
+
   return (
     <>
-      <div className="container-pagination">
-        <div className="container-arrow-image-left">
-          <button>
-            <img
-              className="arrow-image-left"
-              src={imageArrowLeft}
-              alt="Arrow-image-left"
-            />
-          </button>
-        </div>
-        <ul>
-          <li>
-            <button>1</button>
-          </li>
-          <li>
-            <button>2</button>
-          </li>
-          <li>
-            <button>3</button>
-          </li>
-          <li>
-            <button>4</button>
-          </li>
-          <li>
-            <button>5</button>
-          </li>
-        </ul>
-        <div className="container-arrow-image-right">
-          <button>
-            <img
-              className="arrow-image-right"
-              src={imageArrowRight}
-              alt="Arrow-image-right"
-            />
-          </button>
-        </div>
-      </div>
+      <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex", justifyContent: "start" }}>
+          <Button>
+            <ArrowBackIos />
+          </Button>
+        </Box>
+
+        <Box sx={{ display: "flex", justifyContent: "center" }}>{res}</Box>
+
+        <Box sx={{ display: "flex", justifyContent: "end" }}>
+          <Button>
+            {" "}
+            <ArrowForwardIos />
+          </Button>
+        </Box>
+      </Box>
     </>
   );
 };

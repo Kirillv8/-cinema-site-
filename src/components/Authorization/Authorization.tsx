@@ -1,12 +1,18 @@
+import { TextField, Button, FormControl } from "@mui/material";
 const AuthorizationModal = () => {
   return (
     <div>
       <form id="authorizationForm">
-        <label>Authorization Form</label>
-        <input type="text" placeholder="User name"></input>
-        <input type="email" placeholder="User email"></input>
-        <input type="password" placeholder="User password"></input>
-        <button type="button">Авторизоваться</button>
+        <FormControl>
+          <TextField type="text" placeholder="User name" />
+        </FormControl>
+        <FormControl>
+          <TextField type="email" placeholder="User email" />
+        </FormControl>
+        <FormControl>
+          <TextField type="password" placeholder="User password" />
+        </FormControl>
+        <Button type="submit">Авторизоваться</Button>
       </form>
     </div>
   );
