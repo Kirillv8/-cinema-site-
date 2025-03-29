@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { getGenres } from "../../api/moviesApi";
 import { ContextToken } from "../../context/ContextForToken/ContextToken";
-import { Box, Checkbox, FormControlLabel } from "@mui/material";
+import AutocompleteComponent from "../Autocomplete/AutocompleteComponent";
 
 interface Genre {
   id: number | string;
@@ -43,39 +43,14 @@ const MovieList: React.FC<MovieListProps> = ({
     requestGenres();
   }, []);
 
-  const handleGenreChange = (genreId: string, isChecked: boolean) => {
-    setSelectedGenres((prev) => {
-      const newSet = new Set(prev);
-      if (isChecked) {
-        newSet.add(genreId);
-      } else {
-        newSet.delete(genreId);
-      }
-      return newSet;
-    });
-  };
+  
 
   if (loading) return <div>Загрузка...</div>;
   if (error) return <div>Ошибка при загрузке жанров</div>;
 
   return (
     <>
-      {genres.map((genre) => (
-        <Box key={genre.id}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={selectedGenres.has(genre.id.toString())}
-                onChange={(e) =>
-                  handleGenreChange(genre.id.toString(), e.target.checked)
-                }
-                id={`genre-${genre.id}`}
-              />
-            }
-            label={genre.name}
-          />
-        </Box>
-      ))}
+      <AutocompleteComponent movieGenres={genres} />
     </>
   );
 };

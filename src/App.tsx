@@ -6,6 +6,8 @@ import Header from "./components/Header/Header";
 import Filters from "./components/Filters/Filters";
 import { ContextToken } from "./context/ContextForToken/ContextToken";
 import { FiltersProvider } from "./context/ContextForFlters/ContextForFilters";
+import AutocompleteComponent from "./components/Autocomplete/AutocompleteComponent";
+
 const App: React.FC = () => {
   const [isVisibleReg, setIsVisibleReg] = useState<boolean>(false);
   const [isVisibleAuth, setIsVisibleAuth] = useState<boolean>(false);
