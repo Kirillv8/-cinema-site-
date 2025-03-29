@@ -7,6 +7,7 @@ import { ContextOptionsYears } from "../../context/ContextForFlters/ContextForFi
 import { useChangeDispatch } from "../../context/ContextForFlters/ContextForFilters";
 import { IconButton, Box, Typography } from "@mui/material";
 import { Delete } from "@mui/icons-material";
+import SliderComponent from "../Slider/Slider";
 
 const Filters = () => {
   const [selectedGenres, setSelectedGenres] = useState<Set<string>>(new Set());
@@ -34,7 +35,9 @@ const Filters = () => {
           <Delete />
         </IconButton>
       </Box>
-
+      <Box>
+        <SliderComponent />
+      </Box>
       <Box>
         <MovieList
           selectedGenres={selectedGenres}
