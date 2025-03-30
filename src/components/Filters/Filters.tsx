@@ -44,6 +44,7 @@ const Filters = () => {
           setSelectedGenres={setSelectedGenres}
         />
       </Box>
+
       <Box>
         <Pagination />
       </Box>
