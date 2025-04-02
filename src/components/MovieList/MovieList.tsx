@@ -17,6 +17,7 @@ const MovieList: React.FC<MovieListProps> = ({
   selectedGenres,
   setSelectedGenres,
 }) => {
+  
   const [genres, setGenres] = useState<Genre[]>([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);

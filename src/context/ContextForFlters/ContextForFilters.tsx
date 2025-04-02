@@ -30,11 +30,10 @@ export const FiltersProvider: React.FC<FiltersProviderProps> = ({
   return (
     <>
       <ContextOptionAll.Provider value={optionsSelect}>
-        {children}
+        <ContextChangeDispath.Provider value={dispatch}>
+          {children}
+        </ContextChangeDispath.Provider>
       </ContextOptionAll.Provider>{" "}
-      <ContextChangeDispath.Provider value={dispatch}>
-        {children}
-      </ContextChangeDispath.Provider>
     </>
   );
 };
@@ -46,7 +45,6 @@ export const useOptionAll = () => {
 export const useChangeDispatch = () => {
   return useContext(ContextChangeDispath);
 };
-
 
 const yourReducer = (optionAll: Option[], action: Action) => {
   switch (action.type) {

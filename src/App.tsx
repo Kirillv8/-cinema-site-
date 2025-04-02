@@ -7,6 +7,7 @@ import Filters from "./components/Filters/Filters";
 import { ContextToken } from "./context/ContextForToken/ContextToken";
 import { FiltersProvider } from "./context/ContextForFlters/ContextForFilters";
 import AutocompleteComponent from "./components/Autocomplete/AutocompleteComponent";
+import SortMovies from "./components/Filters/SortMovies";
 
 const App: React.FC = () => {
   const [isVisibleReg, setIsVisibleReg] = useState<boolean>(false);
@@ -23,6 +24,7 @@ const App: React.FC = () => {
         <Header handleClick={handleClick} />
         <FiltersProvider>
           <Filters />
+          <SortMovies />
         </FiltersProvider>
       </ContextToken.Provider>
     </>
