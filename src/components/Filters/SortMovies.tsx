@@ -4,8 +4,8 @@ import { useState, useEffect, useContext } from "react";
 import { getPopularFilms } from "../../api/getPopularFilms";
 import { getTopRatingFilms } from "../../api/getTopRatingFilms";
 import { ContextToken } from "../../context/ContextForToken/ContextToken";
-import CardComponent, { MoviesList } from "../Card/CardComponent";
-import MovieList from "../MovieList/MovieList";
+import CardComponent from "../Card/CardComponent";
+import { MoviesList } from "../../types/movieList";
 
 const SortMovies = () => {
   const [sortBy, setSortBy] = useState<string | null>(null);

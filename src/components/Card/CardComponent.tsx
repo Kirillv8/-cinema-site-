@@ -1,25 +1,13 @@
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import DetailsComponent from "./DetailsComponent";
+import { PropCardComponent } from "../../types/movieList";
+import { MovieDetails } from "../../types/detailsFilms";
+import { MovieCast } from "../../types/castFilms";
+import { useState, useContext, useEffect } from "react";
+import { getCastFilms } from "../../api/getCastFilms";
+import { getDetailsFilms } from "../../api/getDetailsFilms";
+import { ContextToken } from "../../context/ContextForToken/ContextToken";
 
-export interface MoviesList {
-  adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
-  id: number;
-  original_language: string;
-  original_title: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  release_date: string;
-  title: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
-}
-
-interface PropCardComponent {
-  movies: MoviesList[];
-}
 const CardComponent: React.FC<PropCardComponent> = ({ movies }) => {
   return (
     <>
@@ -32,7 +20,8 @@ const CardComponent: React.FC<PropCardComponent> = ({ movies }) => {
           />
           <CardContent>
             <Typography variant="h6">{film.title}</Typography>
-            <Typography variant="body2">{`Rating ${film.vote_average}`}</Typography>
+            <Typography variant="body2">{`Rating: ${film.vote_average}`}</Typography>
+            <DetailsComponent filmId={film.id} />
           </CardContent>
         </Card>
       ))}

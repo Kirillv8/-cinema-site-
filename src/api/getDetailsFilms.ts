@@ -1,4 +1,4 @@
-export const getPopularFilms = async (url: string, token: string) => {
+export const getDetailsFilms = async (url: string, token: string) => {
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -14,6 +14,7 @@ export const getPopularFilms = async (url: string, token: string) => {
 
     const data = await response.json();
     console.log(data);
+
     return data;
   } catch (error) {
     if (error instanceof Error) {
