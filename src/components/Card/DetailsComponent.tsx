@@ -7,6 +7,9 @@ import { getCastFilms } from "../../api/getCastFilms";
 import { getDetailsFilms } from "../../api/getDetailsFilms";
 import CastComponent from "./Cast";
 import Detail from "./Detail";
+import { ArrowForward } from "@mui/icons-material";
+import { Button } from "@mui/material";
+
 interface FilmDetailsProps {
   filmId: number;
 }
@@ -33,19 +36,19 @@ const DetailsComponent: React.FC<FilmDetailsProps> = ({ filmId }) => {
     fetchData();
   }, [filmId, token]);
 
-  const handleClickCast = () => {
+  const handleClick = () => {
     setIsVisibleCast(!isVisibleCast);
-  };
-
-  const handleClickDetails = () => {
     setIsVisibleDetails(!isVisbleDetails);
   };
 
   return (
     <CardContent>
-      <CastComponent movieCast={movieCast} />
+      {isVisibleCast && <CastComponent movieCast={movieCast} />}
 
-   <Detail movieDetails={movieDetails}/>
+      {isVisbleDetails && <Detail movieDetails={movieDetails} />}
+      <Button onClick={handleClick}>
+        <ArrowForward />
+      </Button>
     </CardContent>
   );
 };

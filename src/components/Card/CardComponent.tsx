@@ -1,12 +1,6 @@
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import DetailsComponent from "./DetailsComponent";
 import { PropCardComponent } from "../../types/movieList";
-import { MovieDetails } from "../../types/detailsFilms";
-import { MovieCast } from "../../types/castFilms";
-import { useState, useContext, useEffect } from "react";
-import { getCastFilms } from "../../api/getCastFilms";
-import { getDetailsFilms } from "../../api/getDetailsFilms";
-import { ContextToken } from "../../context/ContextForToken/ContextToken";
 
 const CardComponent: React.FC<PropCardComponent> = ({ movies }) => {
   return (

@@ -1,12 +1,7 @@
-// import './styles/components/reg-modal-container.scss';
 import { ChangeEvent, FormEvent, useState } from "react";
 import { FormControl, TextField, Button, FormHelperText } from "@mui/material";
 
-interface PropForRegistration {
-  isVisibleReg: boolean;
-}
-
-const RegistrationModal: React.FC<PropForRegistration> = ({ isVisibleReg }) => {
+const RegistrationModal = () => {
   const [userEmailAndPasswordAndName, setUserEmailAndPasswordAndName] =
     useState({
       email: "",

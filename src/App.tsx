@@ -8,7 +8,8 @@ import { ContextToken } from "./context/ContextForToken/ContextToken";
 import { FiltersProvider } from "./context/ContextForFlters/ContextForFilters";
 import AutocompleteComponent from "./components/Autocomplete/AutocompleteComponent";
 import SortMovies from "./components/Filters/SortMovies";
-
+import AppRoutes from "./routes/AppRoutes";
+import Navigations from "./components/Navigations/Navigations";
 const App: React.FC = () => {
   const [isVisibleReg, setIsVisibleReg] = useState<boolean>(false);
   const [isVisibleAuth, setIsVisibleAuth] = useState<boolean>(false);
@@ -20,11 +21,13 @@ const App: React.FC = () => {
   return (
     <>
       <ContextToken.Provider value={token}>
-        {isVisibleReg && <RegistrationModal isVisibleReg={isVisibleReg} />}
+        {isVisibleReg && <RegistrationModal />}
+        <Navigations />
         <Header handleClick={handleClick} />
         <FiltersProvider>
           <Filters />
           <SortMovies />
+          <AppRoutes />
         </FiltersProvider>
       </ContextToken.Provider>
     </>
