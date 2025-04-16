@@ -6,7 +6,6 @@ import Header from "./components/Header/Header";
 import Filters from "./components/Filters/Filters";
 import { ContextToken } from "./context/ContextForToken/ContextToken";
 import { FiltersProvider } from "./context/ContextForFlters/ContextForFilters";
-import AutocompleteComponent from "./components/Autocomplete/AutocompleteComponent";
 import SortMovies from "./components/Filters/SortMovies";
 import AppRoutes from "./routes/AppRoutes";
 import Navigations from "./components/Navigations/Navigations";
@@ -14,16 +13,26 @@ const App: React.FC = () => {
   const [isVisibleReg, setIsVisibleReg] = useState<boolean>(false);
   const [isVisibleAuth, setIsVisibleAuth] = useState<boolean>(false);
 
-  const handleClick = () => {
+  const handleClickReg = () => {
     setIsVisibleReg(!isVisibleReg);
   };
+
+  const handleClickAuth = () => {
+    setIsVisibleAuth(!isVisibleAuth);
+  };
+
   const token = useContext(ContextToken);
   return (
     <>
       <ContextToken.Provider value={token}>
         {isVisibleReg && <RegistrationModal />}
+        {isVisibleAuth && <AuthorizationModal />}
         <Navigations />
-        <Header handleClick={handleClick} />
+
+        <Header
+          handleClickReg={handleClickReg}
+          handleClickAuth={handleClickAuth}
+        />
         <FiltersProvider>
           <Filters />
           <SortMovies />

@@ -2,10 +2,11 @@ import AppBar from "@mui/material/AppBar";
 import { Box, Typography, Toolbar, Button } from "@mui/material";
 
 interface PropHeader {
-  handleClick: () => void;
+  handleClickReg: () => void;
+  handleClickAuth: () => void;
 }
 
-const Header: React.FC<PropHeader> = ({ handleClick }) => {
+const Header: React.FC<PropHeader> = ({ handleClickReg, handleClickAuth }) => {
   return (
     <>
       <AppBar position="static" color="success">
@@ -14,10 +15,14 @@ const Header: React.FC<PropHeader> = ({ handleClick }) => {
             Фильмы
           </Typography>
           <Box sx={{ display: "flex", gap: 2 }}>
-            <Button color="inherit" variant="outlined">
+            <Button
+              color="inherit"
+              variant="outlined"
+              onClick={handleClickAuth}
+            >
               Вход
             </Button>
-            <Button color="inherit" variant="outlined" onClick={handleClick}>
+            <Button color="inherit" variant="outlined" onClick={handleClickReg}>
               Регистрация
             </Button>
           </Box>
