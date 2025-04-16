@@ -4,6 +4,7 @@ import MainPage from "../pages/MainPage";
 import RegistrationPage from "../pages/RegistrrationPage";
 import SortMoviesPage from "../pages/SortMoviesPage";
 import NotFound from "../pages/NotFound";
+import CardComponentsPage from "../pages/CardComponentsPage";
 
 const navigationRoutes = [
   { path: "/", element: <MainPage /> },
@@ -11,6 +12,7 @@ const navigationRoutes = [
   { path: "/authorization", element: <AuthorizationPage /> },
   { path: "/registration", element: <RegistrationPage /> },
   { path: "/sort-movies", element: <SortMoviesPage /> },
+  { path: "/movies/id", element: <CardComponentsPage /> },
 ];
 
 const AppRoutes = () => {
