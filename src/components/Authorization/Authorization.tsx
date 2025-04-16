@@ -37,21 +37,28 @@ const AuthorizationModal = () => {
         aria-describedby="parent-modal-description"
       >
         <Box sx={{ ...style, width: 400 }}>
-          <div>
-            <form id="authorizationForm">
-              <FormControl>
-                <TextField
-                  id="standard-password-input"
-                  label="Request a token"
-                  type="password"
-                  autoComplete="current-password"
-                  variant="standard"
-                  placeholder="Mail"
-                />
-                <Button type="submit">Авторизоваться</Button>
-              </FormControl>
-            </form>
-          </div>
+          <form id="authorizationForm">
+            <FormControl fullWidth>
+              <TextField
+                id="standard-password-input"
+                label="Request a token"
+                type="password"
+                autoComplete="current-password"
+                variant="standard"
+                placeholder="Mail"
+                fullWidth
+                sx={{ mb: 2 }}
+              />
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Button type="submit" variant="contained">
+                  Request
+                </Button>
+                <Button variant="outlined" onClick={handleClose}>
+                  Cancel
+                </Button>
+              </Box>
+            </FormControl>
+          </form>
           <ChildModal />
         </Box>
       </Modal>
@@ -78,22 +85,28 @@ const ChildModal = () => {
         aria-describedby="child-modal-description"
       >
         <Box sx={{ ...style, width: 200 }}>
-          <div>
-            <form id="authorizationForm">
-              <FormControl>
-                <TextField
-                  id="standard-password-input"
-                  label="Enter token"
-                  type="password"
-                  autoComplete="current-password"
-                  variant="standard"
-                  placeholder="Token"
-                />
-                <Button type="submit"></Button>
-              </FormControl>
-            </form>
-          </div>
-          <Button onClick={handleClose}>Will come back</Button>
+          <form id="authorizationForm">
+            <FormControl fullWidth>
+              <TextField
+                id="standard-password-input"
+                label="Enter token"
+                type="password"
+                autoComplete="current-password"
+                variant="standard"
+                placeholder="Token"
+                fullWidth
+                sx={{ mb: 2 }}
+              />
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Button type="submit" variant="contained">
+                  Enter token
+                </Button>
+                <Button variant="outlined" onClick={handleClose}>
+                  Will come back
+                </Button>
+              </Box>
+            </FormControl>
+          </form>
         </Box>
       </Modal>
     </React.Fragment>
