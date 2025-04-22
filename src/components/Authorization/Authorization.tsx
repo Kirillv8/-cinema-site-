@@ -4,6 +4,7 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import { TextField, FormControl } from "@mui/material";
 
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -20,6 +21,7 @@ const style = {
 
 const AuthorizationModal = () => {
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -68,12 +70,18 @@ const AuthorizationModal = () => {
 
 const ChildModal = () => {
   const [open, setOpen] = React.useState(false);
+
+
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+
+  
+   
+  
 
   return (
     <React.Fragment>

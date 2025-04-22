@@ -1,4 +1,4 @@
-import { useState, useContext, useReducer } from "react";
+import { useState, useContext } from "react";
 import "./App.scss";
 import RegistrationModal from "./components/Registration/RegistrationModal";
 import AuthorizationModal from "./components/Authorization/Authorization";
@@ -9,6 +9,8 @@ import { FiltersProvider } from "./context/ContextForFlters/ContextForFilters";
 import SortMovies from "./components/Filters/SortMovies";
 import AppRoutes from "./routes/AppRoutes";
 import Navigations from "./components/Navigations/Navigations";
+import AccountProvider from "./context/ContextAccount/ContextAccount";
+
 const App: React.FC = () => {
   const [isVisibleReg, setIsVisibleReg] = useState<boolean>(false);
   const [isVisibleAuth, setIsVisibleAuth] = useState<boolean>(false);
@@ -26,7 +28,9 @@ const App: React.FC = () => {
     <>
       <ContextToken.Provider value={token}>
         {isVisibleReg && <RegistrationModal />}
-        {isVisibleAuth && <AuthorizationModal />}
+        <AccountProvider>
+          {isVisibleAuth && <AuthorizationModal />}
+        </AccountProvider>
         <Navigations />
 
         <Header

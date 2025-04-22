@@ -1,7 +1,15 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Button,
+  Box,
+} from "@mui/material";
 import DetailsComponent from "./DetailsComponent";
 import { PropCardComponent } from "../../types/movieList";
 import { Link } from "react-router-dom";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const CardComponent: React.FC<PropCardComponent> = ({ movies }) => {
   return (
@@ -15,7 +23,18 @@ const CardComponent: React.FC<PropCardComponent> = ({ movies }) => {
               title={film.title}
             />
             <CardContent>
-              <Typography variant="h6">{film.title}</Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Typography variant="h6">{film.title}</Typography>
+                <Button>
+                  <FavoriteIcon />
+                </Button>
+              </Box>
               <Typography variant="body2">{`Rating: ${film.vote_average}`}</Typography>
               <DetailsComponent filmId={film.id} />
             </CardContent>

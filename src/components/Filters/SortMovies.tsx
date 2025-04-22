@@ -7,6 +7,7 @@ import { ContextToken } from "../../context/ContextForToken/ContextToken";
 import CardComponent from "../Card/CardComponent";
 import { MoviesList } from "../../types/movieList";
 
+
 const SortMovies = () => {
   const [sortBy, setSortBy] = useState<string | null>(null);
   const [movies, setMovies] = useState<MoviesList[]>([]);
@@ -22,6 +23,7 @@ const SortMovies = () => {
     const fetchData = async () => {
       const urlPopular = `https://api.themoviedb.org/3/movie/popular?api_key=${token}`;
       const urlRating = `https://api.themoviedb.org/3/movie/top_rated?api_key=${token}`;
+   
 
       let result;
       if (sortBy === "popular") {
@@ -43,6 +45,7 @@ const SortMovies = () => {
         <Select value={sortBy || ""} onChange={handleChange}>
           <MenuItem value="popular">Popular</MenuItem>
           <MenuItem value="top-rating">Top rating</MenuItem>
+          {/* <MenuItem value="favorite">Favorite</MenuItem> */}
         </Select>
       </FormControl>
       <CardComponent movies={movies} />

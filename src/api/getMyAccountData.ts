@@ -1,0 +1,26 @@
+export const getMyAccountData = async (url: string, token: string) => {
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Ошибка ${Error.name}`);
+    }
+
+    const data = await response.json();
+    console.log(data.id);
+    return data.id;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.name);
+      console.log(error.message);
+    } else {
+      console.log("Unexpected error:", error);
+    }
+  }
+};
