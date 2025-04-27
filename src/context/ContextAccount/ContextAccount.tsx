@@ -1,10 +1,19 @@
-import { createContext, ReactNode } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { getMyAccountData } from "../../api/getMyAccountData";
-import { useContext, useEffect, useState } from "react";
 import { ContextToken } from "../ContextForToken/ContextToken";
 
+interface AccountId {
+  id: number;
+}
+
 interface AccountData {
-  accountId: number | null;
+  accountId: AccountId;
 }
 
 export const ContextAccount = createContext<AccountData | null>(null);
@@ -12,25 +21,29 @@ export const ContextAccount = createContext<AccountData | null>(null);
 interface PropAccountProvider {
   children: ReactNode;
 }
+
 const AccountProvider: React.FC<PropAccountProvider> = ({ children }) => {
-  const [accountId, setAccountId] = useState(null);
+  const [accountId, setAccountId] = useState<AccountId | null>(null);
   const token = useContext(ContextToken);
-  const urlAccountId = `https://api.themoviedb.org/3/account`;
 
   useEffect(() => {
-    const getMyAccountDataRes = async () => {
-      const resAccountId = await getMyAccountData(urlAccountId, token);
+    if (!token) return;
 
+    const fetchAccountData = async () => {
+      const resAccountId = await getMyAccountData(
+        "https://api.themoviedb.org/3/account",
+        token
+      );
       setAccountId(resAccountId);
     };
-    getMyAccountDataRes();
+
+    fetchAccountData();
   }, [token]);
+
   return (
-    <>
-      <ContextAccount.Provider value={{ accountId }}>
-        {children}
-      </ContextAccount.Provider>
-    </>
+    <ContextAccount.Provider value={accountId ? { accountId } : null}>
+      {children}
+    </ContextAccount.Provider>
   );
 };
 

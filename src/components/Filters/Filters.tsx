@@ -1,32 +1,13 @@
-import { useState, useContext } from "react";
-import { ChangeEvent } from "react";
+import { useState } from "react";
+
 import { Box, Typography, Divider } from "@mui/material";
-import { Delete } from "@mui/icons-material";
 
 import Pagination from "../Pagination/Pagination";
 import MovieList from "../MovieList/MovieList";
 import SliderComponent from "../Slider/Slider";
-import SortMovies from "./SortMovies";
-
-import {
-  ContextOptionGenres,
-  ContextOptionsYears,
-  useChangeDispatch,
-} from "../../context/ContextForFlters/ContextForFilters";
 
 const Filters = () => {
   const [selectedGenres, setSelectedGenres] = useState<Set<string>>(new Set());
-
-  const optionsGenres = useContext(ContextOptionGenres);
-  const optionsYears = useContext(ContextOptionsYears);
-  const dispatch = useChangeDispatch();
-
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    dispatch({
-      type: "change",
-      event: e.target.value,
-    });
-  };
 
   return (
     <Box

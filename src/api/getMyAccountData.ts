@@ -13,7 +13,9 @@ export const getMyAccountData = async (url: string, token: string) => {
     }
 
     const data = await response.json();
+    console.log(data);
     console.log(data.id);
+    console.log(typeof data.id);
     return data.id;
   } catch (error) {
     if (error instanceof Error) {

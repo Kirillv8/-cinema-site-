@@ -1,4 +1,4 @@
-export const getCastFilms = async (url: string, token: string) => {
+export const deleteFavoriteFilms = async (url: string, token: string) => {
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -13,7 +13,7 @@ export const getCastFilms = async (url: string, token: string) => {
     }
 
     const data = await response.json();
-    return data.cast;
+    return data;
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.name);

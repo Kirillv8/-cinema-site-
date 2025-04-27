@@ -1,19 +1,20 @@
-export const getCastFilms = async (url: string, token: string) => {
+export const getFavoriteFilms = async (url: string, token: string) => {
   try {
     const response = await fetch(url, {
-      method: "GET",
+      method: "Get",
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-type": "application/json; charset=UTF-8",
+        "Content-Type": "application/json;charset=utf-8",
       },
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      throw new Error(`Ошибка ${Error.name};
+            }`);
     }
-
     const data = await response.json();
-    return data.cast;
+    console.log(data);
+    return data;
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.name);
