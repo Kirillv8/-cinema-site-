@@ -1,4 +1,4 @@
-import { CardContent, CardMedia } from "@mui/material";
+import { CardContent} from "@mui/material";
 import { MovieCast } from "../../types/castFilms";
 import { MovieDetails } from "../../types/detailsFilms";
 import { ContextToken } from "../../context/ContextForToken/ContextToken";

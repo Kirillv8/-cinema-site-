@@ -71,8 +71,8 @@ const CardComponent: React.FC<PropCardComponent> = ({ movies }) => {
 
               <Button
                 onClick={(e) => {
-                  e.stopPropagation(); // предотвращает всплытие
-                  e.preventDefault(); // предотвращает переход, если вдруг
+                  e.stopPropagation();
+                  e.preventDefault();
                   handleClick(film);
                 }}
               >

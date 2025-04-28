@@ -1,14 +1,18 @@
 import { useState } from "react";
-
 import { Box, Typography, Divider } from "@mui/material";
 
 import Pagination from "../Pagination/Pagination";
 import MovieList from "../MovieList/MovieList";
 import SliderComponent from "../Slider/Slider";
+import MovieTitle from "../Card/MovieTitle";
+import CardComponent from "../Card/CardComponent";
+import { MoviesList } from "../../types/movieList";
 
 const Filters = () => {
   const [selectedGenres, setSelectedGenres] = useState<Set<string>>(new Set());
+  const [movies, setMovies] = useState<MoviesList[]>([]);
 
+  console.log(movies);
   return (
     <Box
       sx={{
@@ -31,9 +35,8 @@ const Filters = () => {
         <Typography variant="h5" gutterBottom>
           Фильтры
         </Typography>
-
+        <MovieTitle setMovies={setMovies} />
         <SliderComponent />
-
         <MovieList
           selectedGenres={selectedGenres}
           setSelectedGenres={setSelectedGenres}
@@ -41,7 +44,6 @@ const Filters = () => {
         <Box>
           <Pagination />
         </Box>
-        {/* <SortMovies /> */}
       </Box>
 
       <Divider orientation="vertical" flexItem />
@@ -56,8 +58,7 @@ const Filters = () => {
           maxWidth: "1000px",
         }}
       >
-        {/* Карточки фильмов от SortMovies */}
-        {/* <SortMovies /> тут карточки фильмов добавить */}
+        <CardComponent movies={movies} />
       </Box>
     </Box>
   );
