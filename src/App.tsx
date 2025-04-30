@@ -10,6 +10,7 @@ import SortMovies from "./components/Filters/SortMovies";
 import AppRoutes from "./routes/AppRoutes";
 import Navigations from "./components/Navigations/Navigations";
 import AccountProvider from "./context/ContextAccount/ContextAccount";
+import ContextMovieTitleComponent from "./context/ContextMoviesTitle/ContextMoviesTitle";
 
 const App: React.FC = () => {
   const [isVisibleReg, setIsVisibleReg] = useState<boolean>(false);
@@ -38,8 +39,12 @@ const App: React.FC = () => {
           handleClickAuth={handleClickAuth}
         />
         <FiltersProvider>
-          <Filters />
-          <SortMovies />
+          <ContextMovieTitleComponent>
+            {" "}
+            <Filters />
+            <SortMovies />
+          </ContextMovieTitleComponent>
+
           <AppRoutes />
         </FiltersProvider>
       </ContextToken.Provider>

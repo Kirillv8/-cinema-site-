@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Box, Typography, Divider } from "@mui/material";
 
 import Pagination from "../Pagination/Pagination";
@@ -7,12 +7,18 @@ import SliderComponent from "../Slider/Slider";
 import MovieTitle from "../Card/MovieTitle";
 import CardComponent from "../Card/CardComponent";
 import { MoviesList } from "../../types/movieList";
+import { ContextMoviesTitle } from "../../context/ContextMoviesTitle/ContextMoviesTitle";
 
 const Filters = () => {
   const [selectedGenres, setSelectedGenres] = useState<Set<string>>(new Set());
-  const [movies, setMovies] = useState<MoviesList[]>([]);
+  const [movies] = useState<MoviesList[]>([]);
+  const state = useContext(ContextMoviesTitle);
 
-  console.log(movies);
+  // const dynamicProps = state || movies  ? {state: movies}
+  // : { variant: "secondary", disabled: true };
+
+  if (!state) return null;
+
   return (
     <Box
       sx={{
@@ -35,7 +41,7 @@ const Filters = () => {
         <Typography variant="h5" gutterBottom>
           Фильтры
         </Typography>
-        <MovieTitle setMovies={setMovies} />
+        <MovieTitle />
         <SliderComponent />
         <MovieList
           selectedGenres={selectedGenres}
@@ -58,7 +64,7 @@ const Filters = () => {
           maxWidth: "1000px",
         }}
       >
-        <CardComponent movies={movies} />
+        <CardComponent movies={movies.length > 0 ? movies : state.movies} />
       </Box>
     </Box>
   );

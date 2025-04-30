@@ -1,43 +1,45 @@
 import { Box, Button, TextField } from "@mui/material";
 import { getMovieTitle } from "../../api/getMovieTitle";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { ChangeEvent } from "react";
 import { ContextToken } from "../../context/ContextForToken/ContextToken";
-import { MoviesList } from "../../types/movieList";
+import { ContextMoviesTitle } from "../../context/ContextMoviesTitle/ContextMoviesTitle";
+import { ContextDispathMovieTitle } from "../../context/ContextMoviesTitle/ContextMoviesTitle";
 
-interface MovieTitleProps {
-  setMovies: React.Dispatch<React.SetStateAction<MoviesList[]>>;
-}
-
-const MovieTitle: React.FC<MovieTitleProps> = ({ setMovies }) => {
-  const [movieTitle, setMovieTitle] = useState("");
+const MovieTitle = () => {
   const token = useContext(ContextToken);
+  const state = useContext(ContextMoviesTitle);
+  const dispatch = useContext(ContextDispathMovieTitle);
+
+  if (!state || !dispatch) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Сабмит сработал");
-    const dataGetMovieTitle = await getMovieTitle(movieTitle, token);
-
-    console.log(dataGetMovieTitle);
-    
-    if (dataGetMovieTitle) {
-      setMovies(dataGetMovieTitle);
+    if (!state.query.trim()) {
+      console.warn(`Query is empty${state.query}`);
+      return;
+    }
+    const data = await getMovieTitle(state.query, token);
+    if (data) {
+      dispatch({ type: "SET_MOVIES", payload: data });
+      console.log("DISPATCHED DATA:", data);
     }
   };
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setMovieTitle(e.target.value);
+    dispatch({ type: "SET_QUERY", payload: e.target.value });
+    console.log("QUERY SUBMITTED:", state.query);
   };
 
   return (
-    <Box component="form" onSubmit={(e) => handleSubmit(e)}>
+    <Box component="form" onSubmit={handleSubmit}>
       <TextField
         label="Movie search"
         variant="outlined"
-        value={movieTitle}
-        onChange={(e) => handleChange(e)}
+        value={state.query}
+        onChange={handleChange}
       />
       <Button type="submit">Send</Button>
     </Box>
