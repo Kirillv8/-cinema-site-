@@ -1,6 +1,5 @@
-import { useState, useContext } from "react";
+import { useState, useContext, memo } from "react";
 import { Box, Typography, Divider } from "@mui/material";
-
 import Pagination from "../Pagination/Pagination";
 import MovieList from "../MovieList/MovieList";
 import SliderComponent from "../Slider/Slider";
@@ -14,9 +13,7 @@ const Filters = () => {
   const [movies] = useState<MoviesList[]>([]);
   const state = useContext(ContextMoviesTitle);
 
-  // const dynamicProps = state || movies  ? {state: movies}
-  // : { variant: "secondary", disabled: true };
-
+  console.log("рендер фильтров");
   if (!state) return null;
 
   return (
@@ -70,4 +67,4 @@ const Filters = () => {
   );
 };
 
-export default Filters;
+export default memo(Filters);

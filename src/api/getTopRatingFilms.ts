@@ -11,11 +11,10 @@ export const getTopRatingFilms = async (url: string, token: string) => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    
-    const data = await response.json();
-    console.log(data.results);
-    return data.results;
 
+    const data = await response.json();
+
+    return data.results;
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.name);

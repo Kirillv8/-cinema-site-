@@ -17,7 +17,7 @@ export const getMovieTitle = async (movieTitle: string, token: string) => {
     }
 
     const data = await response.json();
-    console.log(data);
+
     return data.results;
   } catch (error) {
     if (error instanceof Error) {

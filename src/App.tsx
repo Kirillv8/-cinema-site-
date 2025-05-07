@@ -15,6 +15,7 @@ import ContextMovieTitleComponent from "./context/ContextMoviesTitle/ContextMovi
 const App: React.FC = () => {
   const [isVisibleReg, setIsVisibleReg] = useState<boolean>(false);
   const [isVisibleAuth, setIsVisibleAuth] = useState<boolean>(false);
+  console.log("Сколько раз компонент App перендерился");
 
   const handleClickReg = () => {
     setIsVisibleReg(!isVisibleReg);

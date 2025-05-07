@@ -10,7 +10,7 @@ import DetailsComponent from "./DetailsComponent";
 import { MoviesList, PropCardComponent } from "../../types/movieList";
 import { Link } from "react-router-dom";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useState, useContext } from "react";
+import { useState, useContext, memo, useMemo, useCallback } from "react";
 import { addFavoriteFilms } from "../../api/addFavoriteFilms";
 import { deleteFavoriteFilms } from "../../api/deleteFavoriteFilms";
 import { getFavoriteFilms } from "../../api/getFavoriteFilms";
@@ -22,75 +22,80 @@ const CardComponent: React.FC<PropCardComponent> = ({ movies }) => {
   const token = useContext(ContextToken);
   const { accountId } = useContext(ContextAccount) || {};
 
-  const handleClick = (film: MoviesList) => {
-    if (!token || !accountId?.id) return;
+  console.log("card component долго рендерится");
 
-    const isFavorite = favoriteFilms.includes(film.id);
-    const url = `https://api.themoviedb.org/3/account/${accountId.id}/favorite`;
+  const renderCards = useMemo(() => {
+    return movies.map((film) => (
+      <Card sx={{ maxWidth: 300, padding: 2 }} key={film.id}>
+        <Link to={`${film.id}`}>
+          <CardMedia
+            sx={{ height: 140 }}
+            image={`https://image.tmdb.org/t/p/w500${film.backdrop_path}`}
+            title={film.title}
+          />
+        </Link>
 
-    setFavoriteFilms((prev) =>
-      isFavorite ? prev.filter((id) => id !== film.id) : [...prev, film.id]
-    );
+        <CardContent>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              variant="h6"
+              component={Link}
+              to={`${film.id}`}
+              sx={{ textDecoration: "none", color: "inherit" }}
+            >
+              {film.title}
+            </Typography>
 
-    const resultAddFilms = async () => {
-      const res = await addFavoriteFilms(url, token, film.id, !isFavorite);
-      return res;
-    };
-    resultAddFilms();
-    console.log("ferfrfr");
-  };
-
-  return (
-    <>
-      {movies.map((film) => (
-        <Card sx={{ maxWidth: 300, padding: 2 }} key={film.id}>
-          <Link to={`${film.id}`}>
-            <CardMedia
-              sx={{ height: 140 }}
-              image={`https://image.tmdb.org/t/p/w500${film.backdrop_path}`}
-              title={film.title}
-            />
-          </Link>
-
-          <CardContent>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
+            <Button
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                handleClick(film);
               }}
             >
-              <Typography
-                variant="h6"
-                component={Link}
-                to={`${film.id}`}
-                sx={{ textDecoration: "none", color: "inherit" }}
-              >
-                {film.title}
-              </Typography>
-
-              <Button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  handleClick(film);
+              <FavoriteIcon
+                sx={{
+                  color: favoriteFilms.includes(film.id) ? "red" : "grey",
                 }}
-              >
-                <FavoriteIcon
-                  sx={{
-                    color: favoriteFilms.includes(film.id) ? "red" : "grey",
-                  }}
-                />
-              </Button>
-            </Box>
+              />
+            </Button>
+          </Box>
 
-            <Typography variant="body2">{`Rating: ${film.vote_average}`}</Typography>
-            <DetailsComponent filmId={film.id} />
-          </CardContent>
-        </Card>
-      ))}
-    </>
+          <Typography variant="body2">{`Rating: ${film.vote_average}`}</Typography>
+          <DetailsComponent filmId={film.id} />
+        </CardContent>
+      </Card>
+    ));
+  }, [movies]);
+
+  const handleClick = useCallback(
+    (film: MoviesList) => {
+      if (!token || !accountId?.id) return;
+
+      const isFavorite = favoriteFilms.includes(film.id);
+      const url = `https://api.themoviedb.org/3/account/${accountId.id}/favorite`;
+
+      setFavoriteFilms((prev) =>
+        isFavorite ? prev.filter((id) => id !== film.id) : [...prev, film.id]
+      );
+
+      const resultAddFilms = async () => {
+        const res = await addFavoriteFilms(url, token, film.id, !isFavorite);
+        return res;
+      };
+      resultAddFilms();
+      console.log("ferfrfr");
+    },
+    [token, accountId, favoriteFilms]
   );
+
+  return <>{renderCards}</>;
 };
 
-export default CardComponent;
+export default memo(CardComponent);
