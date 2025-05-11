@@ -35,7 +35,7 @@ const RegistrationModal = () => {
     }
     if (userEmailAndPasswordAndName.password.length > 30) {
       setPasswordError(
-        "The password must be no more than thirty characters long."
+        "The password must be no more than thirty characters long.",
       );
       return false;
     }
@@ -49,11 +49,6 @@ const RegistrationModal = () => {
 
     const isEmailValid = validateEmail();
     const isPasswordValid = validatePassword();
-
-    if (isEmailValid && isPasswordValid) {
-      console.log(`Login: ${userEmailAndPasswordAndName.email}`);
-      console.log(`Password: ${userEmailAndPasswordAndName.password}`);
-    }
   };
 
   const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {

@@ -12,8 +12,7 @@ const MovieTitle = () => {
   const state = useContext(ContextMoviesTitle);
   const dispatch = useContext(ContextDispathMovieTitle);
 
-  console.log("MovieTitle");
-
+ 
   if (!state || !dispatch) return null;
 
   const handleSubmit = useCallback(
@@ -24,7 +23,7 @@ const MovieTitle = () => {
         return;
       }
       const data = await getMovieTitle(inputValue, token);
-      console.log(data);
+    
       if (data) {
         dispatch({ type: "SET_MOVIES", payload: data });
         console.log("DISPATCHED DATA:", data);

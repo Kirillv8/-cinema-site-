@@ -2,7 +2,7 @@ export const addFavoriteFilms = async (
   url: string,
   token: string,
   movieId: number,
-  favorite: boolean
+  favorite: boolean,
 ) => {
   try {
     const response = await fetch(url, {
@@ -23,7 +23,6 @@ export const addFavoriteFilms = async (
     }
 
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     if (error instanceof Error) {

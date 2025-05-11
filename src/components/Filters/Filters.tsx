@@ -13,7 +13,6 @@ const Filters = () => {
   const [movies] = useState<MoviesList[]>([]);
   const state = useContext(ContextMoviesTitle);
 
-  console.log("рендер фильтров");
   if (!state) return null;
 
   return (

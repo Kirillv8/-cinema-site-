@@ -22,8 +22,6 @@ const CardComponent: React.FC<PropCardComponent> = ({ movies }) => {
   const token = useContext(ContextToken);
   const { accountId } = useContext(ContextAccount) || {};
 
-  console.log("card component долго рендерится");
-
   const renderCards = useMemo(() => {
     return movies.map((film) => (
       <Card sx={{ maxWidth: 300, padding: 2 }} key={film.id}>
@@ -82,7 +80,7 @@ const CardComponent: React.FC<PropCardComponent> = ({ movies }) => {
       const url = `https://api.themoviedb.org/3/account/${accountId.id}/favorite`;
 
       setFavoriteFilms((prev) =>
-        isFavorite ? prev.filter((id) => id !== film.id) : [...prev, film.id]
+        isFavorite ? prev.filter((id) => id !== film.id) : [...prev, film.id],
       );
 
       const resultAddFilms = async () => {
@@ -90,9 +88,8 @@ const CardComponent: React.FC<PropCardComponent> = ({ movies }) => {
         return res;
       };
       resultAddFilms();
-      console.log("ferfrfr");
     },
-    [token, accountId, favoriteFilms]
+    [token, accountId, favoriteFilms],
   );
 
   return <>{renderCards}</>;
