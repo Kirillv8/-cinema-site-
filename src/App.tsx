@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import "./App.scss";
+
 import RegistrationModal from "./components/Registration/RegistrationModal";
 import AuthorizationModal from "./components/Authorization/Authorization";
 import Header from "./components/Header/Header";

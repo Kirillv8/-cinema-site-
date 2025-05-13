@@ -46,7 +46,7 @@ const AuthorizationModal = () => {
                 label="Request a token"
                 type="password"
                 autoComplete="current-password"
-                variant="standard"
+                variant="standard" 
                 placeholder="Mail"
                 fullWidth
                 sx={{ mb: 2 }}
