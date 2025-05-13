@@ -1,0 +1,5 @@
+import { createContext } from "react";
+
+export const ContextToken = createContext(
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1NTIwMDQ1ZmZjNDU2Y2ZlNTdmYWFhOTBiNTFjMTk2YSIsIm5iZiI6MTcyMjUyNzM0OS4wODgsInN1YiI6IjY2YWJhZTc1NGZlNDIxMzEwY2QyY2M4YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tiiJIjyQwzyPjCE1wkYwAyuFwBAH48g_V2plF_4kwow"
+);
